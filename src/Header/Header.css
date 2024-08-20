@@ -18,6 +18,7 @@ h2 {
   align-items: center;
   background-color: #6499d051;
   height: 150px;
+  /*max-width: 1364px;*/
 }
 
 .titulo-e-pequisa-div {
@@ -31,7 +32,7 @@ h2 {
   height: 80px;
   display: flex;
   justify-content: space-between;
-  width: 1280px;
+  /*width: 1364px;*/
   margin-left: 16px;
 }
 
@@ -53,22 +54,20 @@ h2 {
 
 .icone-de-pesquisa {
   width: 32px;
-  margin-right: 20px;
   color: white;
   cursor: pointer;
 }
 
-.search-div {
-  display: flex;
-  margin-right: 30px;
-  width: 100%;
+.search--input-div {
+  margin:0px 20px 0px 300px;
+  flex: 1;
 }
 
-.div-search-and-input{
+.search-div{
+  width: 80px;
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  flex: 1;
-  margin-left: 350px;
 }
 
 .input-text-pesquisa {
@@ -80,19 +79,19 @@ h2 {
   font-size: 20px;
   padding-left: 8px ;
   background-color: white;
+  margin: 0px;
 }
 
 /*Código da responsividade do Header*/
 
 @media (max-width: 1100px) {
   .div-search-and-input {
-    margin-left:200px;
+    min-width: none;
   }
 }
 
 @media (max-width: 900px) {
   .div-search-and-input {
-    margin-left: 100px;
   }
 
   .header-main {
@@ -104,17 +103,49 @@ h2 {
   }
 }
 
-@media (max-width: 720px) {
-  .input-text-pesquisa {
+@media (max-width: 600px) {
+  .icone-de-pesquisa {
+    width: 80px;
+  }
+}
+
+h2.hidden {
+  display: none;
+}
+
+.search-div.visible {
+  display: block;
+}
+
+.search--input-div.visible{
+  display: flex;
+}
+
+/* Opcional: esconder o input de pesquisa por padrão em dispositivos móveis */
+@media (max-width: 768px) {
+  .search-div {
+    width: 30px;
+    margin:0px 20px;
+  }
+
+  .icone-de-pesquisa {
+    width: 20px;
+  }
+
+  .search-div.visible {
+    display: flex;
+    margin-right: 30px;
+    width: 100%;
+  }
+
+  .search--input-div {
+    margin:0px 0px 0px 20px;
     display: none;
   }
 
   .icone-de-pesquisa {
-    width: 50px;
-  }
-
-  .div-search-and-input {
-    margin-left: 0px;
+    width: 40px;
+    margin: 0;
   }
 
   .filtros {
@@ -128,17 +159,14 @@ h2 {
   }
 
   .header-main {
-    height: 80px;
+    height: 70px;
   }
 
   .titulo-e-pequisa-div {
-    height: 80px;
-  }
-}
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
 
-@media (max-width: 600px) {
-  .icone-de-pesquisa {
-    width: 80px;
   }
 }
 

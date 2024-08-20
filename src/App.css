@@ -99,5 +99,6 @@ button:hover {
 @media (max-width: 720px) {
   .grade-de-produtos {
     grid-template-columns: 1fr;
+    margin-top: 20px;
   }
 }
