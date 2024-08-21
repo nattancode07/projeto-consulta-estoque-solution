@@ -88,11 +88,13 @@ h2 {
   .div-search-and-input {
     min-width: none;
   }
+
+  .search--input-div {
+    margin-left: 100px ;
+  }
 }
 
 @media (max-width: 900px) {
-  .div-search-and-input {
-  }
 
   .header-main {
     height: 100px;
@@ -101,6 +103,11 @@ h2 {
   .filtros {
     display: none;
   }
+
+  .search--input-div {
+    margin-left: 100px ;
+  }
+
 }
 
 @media (max-width: 600px) {
@@ -108,10 +115,6 @@ h2 {
     width: 80px;
   }
 }
-
-
-
-
 
 /* Opcional: esconder o input de pesquisa por padrão em dispositivos móveis */
 @media (max-width: 768px) {
