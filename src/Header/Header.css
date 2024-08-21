@@ -17,7 +17,7 @@ h2 {
   justify-content: start;
   align-items: center;
   background-color: #6499d051;
-  height: 150px;
+  height: 200px;
   /*max-width: 1364px;*/
 }
 
@@ -29,11 +29,15 @@ h2 {
 }
 
 .filtros {
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  /*width: 1364px;*/
-  margin-left: 16px;
+  height: 120px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 40px;
+  margin: 0px 16px;
+}
+
+.input-text-filtro {
+  width: 50%;
 }
 
 .fornecedor-filtro-div,
@@ -43,13 +47,14 @@ h2 {
 .codigo-filtro-div {
   display: flex;
   align-items: center;
-  
   height: 30px;
 }
 
 .label-filtros {
   margin:0px 4px;
   font-weight: bolder;
+  width: 100px;
+  /*text-align: center;*/
 }
 
 .icone-de-pesquisa {
@@ -161,7 +166,6 @@ h2 {
     height: 70px;
     display: flex;
     justify-content: space-between;
-
   }
 
   h2.hidden {

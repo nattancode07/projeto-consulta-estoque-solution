@@ -48,27 +48,27 @@ function Header({setQuery, setFilters}) {
 
         <div className="fornecedor-filtro-div">
           <label className="label-filtros" htmlFor="">Fornecedor:</label>
-          <input onChange={handleQueryChange} type="text" id="input-text-pesquisa"/>
+          <input onChange={handleQueryChange} className="input-text-filtro" type="text" id="input-text-pesquisa"/>
         </div>
 
         <div className="fabricante-filtro-div">
           <label className="label-filtros" htmlFor="">Fabricante:</label>
-          <input type="text" name="" id="" onChange={handleFilterChange}/>
+          <input type="text" name="" id="" className="input-text-filtro" onChange={handleFilterChange}/>
         </div>
 
         <div className="referencia-filtro-div">
           <label className="label-filtros" htmlFor="">Referência:</label>
-          <input type="text" name="" id="" onChange={handleFilterChange}/>
+          <input type="text" name="" id="" className="input-text-filtro" onChange={handleFilterChange}/>
         </div>
-          <br />
+        
         <div className="grupo-filtro-div">
           <label className="label-filtros" htmlFor="">Grupo:</label>
-          <input type="text" name="" id="" onChange={handleFilterChange}/>
+          <input type="text" name="" id="" className="input-text-filtro" onChange={handleFilterChange}/>
         </div>
 
         <div className="codigo-filtro-div">
           <label className="label-filtros" htmlFor="">Código:</label>
-          <input type="text" name="" id="" onChange={handleFilterChange}/>
+          <input type="text" name="" id="" className="input-text-filtro" onChange={handleFilterChange}/>
         </div>
         
       </div>
