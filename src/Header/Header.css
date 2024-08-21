@@ -109,17 +109,9 @@ h2 {
   }
 }
 
-h2.hidden {
-  display: none;
-}
 
-.search-div.visible {
-  display: block;
-}
 
-.search--input-div.visible{
-  display: flex;
-}
+
 
 /* Opcional: esconder o input de pesquisa por padrão em dispositivos móveis */
 @media (max-width: 768px) {
@@ -167,6 +159,18 @@ h2.hidden {
     display: flex;
     justify-content: space-between;
 
+  }
+
+  h2.hidden {
+    display: none;
+  }
+  
+  .search-div.visible {
+    display: block;
+  }
+
+  .search--input-div.visible{
+    display: flex;
   }
 }
 
