@@ -29,7 +29,7 @@ h2 {
 }
 
 .filtros {
-  height: 120px;
+  height: 100px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 40px;
@@ -102,11 +102,11 @@ h2 {
 @media (max-width: 900px) {
 
   .header-main {
-    height: 100px;
+    height: 200px;
   }
 
   .filtros {
-    display: none;
+    height: 100px;
   }
 
   .search--input-div {
@@ -148,18 +148,19 @@ h2 {
     margin: 0;
   }
 
+  .header-main {
+    height: 200px;
+  }
+
   .filtros {
-    display: none;
+    height: 100px;
+    grid-template-columns:  1fr 1fr;
   }
 
   h2 {
     font-size: 22px;
     margin: 0px 0px 0px 20px;
     width: 250px;
-  }
-
-  .header-main {
-    height: 70px;
   }
 
   .titulo-e-pequisa-div {
