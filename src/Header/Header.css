@@ -149,12 +149,17 @@ h2 {
   }
 
   .header-main {
-    height: 200px;
+    height: 280px;
   }
 
   .filtros {
-    height: 100px;
-    grid-template-columns:  1fr 1fr;
+    height: 190px;
+    grid-template-columns:  1fr ;
+    gap: 10px;
+  }
+
+  .input-text-filtro {
+    width: 60%;
   }
 
   h2 {
