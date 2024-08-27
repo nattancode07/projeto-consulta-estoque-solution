@@ -1,10 +1,31 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 
 function Home () {
+
+  const socket = io('http://localhost:3000');
+  const [produtos, setProdutos] = useState([]);
+
+  useEffect(() => {
+    socket.on('update', (data) => {
+        setProdutos(data);
+    });
+
+    return () => {
+        socket.off('update');
+    };
+}, );
 
   return (
 
     <main className = "grade-de-produtos">
+
+        <div>
+            {produtos.map(produto => (
+                <div key={produto.id}>{produto.nome}</div>
+            ))}
+        </div>
 
       <div className="produto-div">
         <div className="desc-nome-div">
