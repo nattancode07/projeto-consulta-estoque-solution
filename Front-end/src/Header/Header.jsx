@@ -1,10 +1,12 @@
 import "./Header.css";
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import {useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Header({setQuery, setFilters}) {
 
   const [searchVisible, setSearchVisible] = useState(false);
+  const [ setProducts] = useState({ name: '', supplier: '', code: '' });
 
   Header.propTypes = {
     setFilters: PropTypes.func.isRequired,
@@ -25,6 +27,22 @@ function Header({setQuery, setFilters}) {
   const toggleSearchVisibility = () => {
     setSearchVisible(!searchVisible);
   }
+
+     // Função para buscar produtos com filtros
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+     const fetchProducts = async () => {
+      try {
+          const response = await axios.get('http://localhost:3001/api/products');
+          setProducts(response.data);
+      } catch (error) {
+          console.error('Erro ao buscar produtos:', error);
+      }
+    };
+
+  // Efeito para buscar produtos quando o componente for montado ou filtros forem alterados
+  useEffect(() => {
+      fetchProducts();
+  }, [fetchProducts]);
 
   return (
     <header className="header-main">

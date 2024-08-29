@@ -1,270 +1,57 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
-function Home () {
+import {Link} from 'react-router-dom'
 
-  const socket = io('http://localhost:3000');
-  const [produtos, setProdutos] = useState([]);
+const socket = io('http://localhost:3001');
 
-  useEffect(() => {
-    socket.on('update', (data) => {
-        setProdutos(data);
-    });
+function Home() {
+    const [products, setProducts] = useState([]);
+    
 
-    return () => {
-        socket.off('update');
-    };
-}, );
+    
+
+    // Efeito para buscar produtos quando o componente for montado ou filtros forem alterados
+
+    // Efeito para receber atualizações em tempo real
+    useEffect(() => {
+        socket.on('updateProducts', (updatedProducts) => {
+            setProducts(updatedProducts);
+        });
+
+        return () => {
+            socket.off('updateProducts');
+        };
+    }, []);
 
   return (
 
     <main className = "grade-de-produtos">
 
-        <div>
-            {produtos.map(produto => (
-                <div key={produto.id}>{produto.nome}</div>
-            ))}
-        </div>
+      <div  className="">
 
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 1</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
+      {products.map((products, index) => (
 
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 2</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
+        
+            <div className="produto-div" key={index}>
+              <div className="desc-nome-div">
+                <p className="nome-produto">{products.Mercadoria}</p>
+                <p className="descricao-do-produto">
+                {products.Fabricante} <br /> {products.Fornecedor}; <br /> NomeFornecedor <br /> {products["Unidade de Estoque"]}
+                </p>
+              </div>
+              <div className= "div-seta-veja-mais">
+                <Link to="/Products">
+                    <button className="button-veja-mais">
+                      <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
+                    </button>
+                </Link>
+              </div>
+            </div>
+          ))}
 
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 3</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
+          
 
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 4</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 5</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 6</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 7</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 8</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 9</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 10</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 11</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 12</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 13</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 14</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="produto-div">
-        <div className="desc-nome-div">
-          <p className="nome-produto">Produto 15</p>
-          <p className="descricao-do-produto">
-            NomeFabricante <br /> NumReferência <br /> NomeFornecedor <br /> Estoque : NumQuantidade
-          </p>
-        </div>
-        <div className= "div-seta-veja-mais">
-          <Link to="/Products">
-              <button className="button-veja-mais">
-                <img src="/icons8-duplo-para-a-direita-24.png" alt="" />
-              </button>
-          </Link>
-        </div>
       </div>
 
       <div className="produto-div">
@@ -283,7 +70,7 @@ function Home () {
         </div>
       </div>
       
-    </main>
+      </main>
   )
 
 }
