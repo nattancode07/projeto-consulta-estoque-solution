@@ -68,7 +68,7 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(3023, () => {
+server.listen(3001, () => {
     console.log('Servidor rodando na porta 3023');
 });
 
