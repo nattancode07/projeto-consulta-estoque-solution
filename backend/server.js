@@ -5,6 +5,7 @@ const http = require('http');
 const cors = require('cors');
 const { Server } = require('socket.io');
 const sql = require('mssql');
+var Promise = require('promise');
 
 // Configurações de conexão com o SQL Server
 const config = {
@@ -38,16 +39,35 @@ sql.connect(config).then(() => {
     console.error('Erro ao conectar ao SQL Server:', err);
 });
 
-// API para obter produtos
 app.get('/api/products', async (req, res) => {
+  try {
+      const pool = await sql.connect(config);
+      const result = await pool.request().query('select * from Cadastro_de_mercadorias');
+      res.json(result.recordset);
+  } catch (err) {
+      res.status(500).send('Erro ao consultar produtos');
+  }})
+
+// API para obter produtos
+app.get('/api/products/:id', async (req, res) => { //:id
+    const { id } = req.params;
     try {
-        const pool = await sql.connect(config);
-        const result = await pool.request().query('select * from Cadastro_de_mercadorias');
-        res.json(result.recordset);
-    } catch (err) {
-        res.status(500).send('Erro ao consultar produtos');
+      const pool = await poolPromise;
+      const result = await pool.request()
+        .input('id', sql.Int, id)
+        .query('SELECT * FROM Cadastro_de_mercadorias where id = @id',{id}); //WHERE id = @id
+  
+      if (result.recordset.length > 0) {
+        res.json(result.recordset[0]);
+      } else {
+        res.status(404).send('Produto não encontrado');
+      }
+    } catch (error) {
+      console.error('Erro ao buscar produto com ID:', id, error);
+      res.status(500).send('Erro ao buscar produto');
     }
-});
+  });
+  
 
 // Monitorar alterações na tabela
 function monitorDatabase() {
@@ -59,7 +79,7 @@ function monitorDatabase() {
         } catch (err) {
             console.error('Erro ao monitorar o banco de dados:', err);
         }
-    }, 5000); // Intervalo para checar alterações
+    }, 3000); // Intervalo para checar alterações
 }
 
 monitorDatabase();
@@ -67,3 +87,38 @@ monitorDatabase();
 server.listen(3001, () => {
     console.log('Servidor rodando na porta 3001');
 });
+
+/*app.get('/products', async (req, res) => {
+    const { id } = req.params;
+    try {
+      const product = await db.query("SELECT * FROM Cadastro_de_mercadorias ");// WHERE id =${id}
+      if (product.length > 0) {
+        res.json(product[0]);
+      } else {
+        res.status(404).send('Produto não encontrado');
+      }
+    } catch (error) {
+      console.error('Erro ao buscar produto com ID:', id, error);
+      res.status(500).send('Erro ao buscar produto');
+    }
+  });*/
+/*
+  const express = require('express');
+const app = express();
+const productsRoutes = require('./routes/products');
+
+// Middleware para permitir CORS
+const cors = require('cors');
+app.use(cors());
+
+// Middleware para JSON
+app.use(express.json());
+
+// Usar as rotas
+app.use('/api', productsRoutes);
+
+// Iniciar o servidor
+const PORT = process.env.PORT || 3023;
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});*/

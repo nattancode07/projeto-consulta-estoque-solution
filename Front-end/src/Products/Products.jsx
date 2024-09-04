@@ -1,11 +1,41 @@
 import "./Products.css"
 import { Link } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 
 
 function Products() {
-  return (
+  const { id } = useParams(); // Captura o ID do produto a partir da URL
+  const [product, setProduto] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    // Função para buscar os detalhes do produto
+    const fetchProduct = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/api/products/${id}`);
+        setProduto(response.data); // Salva os dados do produto no estado
+        setLoading(false);
+      } catch (err) {
+        console.error('Erro ao buscar produto:', err);
+        setError('Erro ao carregar os dados do produto');
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading) return <div>Carregando...</div>;
+  if (error) return <div>{error}</div>;
+
+  // Se `produto` ainda for null, não tenta renderizar nada
+  if (!product) return <div>Nenhum produto encontrado</div>;
+  
+  return (
     
     <main className= "produto">
       <header className="header-products">
@@ -15,15 +45,15 @@ function Products() {
         </button>
       </Link>
       </header>
-    <h1>Nome do Produto </h1>
+    <h1>{product["Mercadoria"]} </h1>
 
     <section className="detalhes-produto-section">
-      <p>Código do produto: 000000000</p>
+      <p>Código do produto: {product["Código da Mercadoria"]}</p>
       <p>Referência: 12345</p> 
-      <p>Grupo: XXXXXXX</p>
-      <p>Fornecedor: MMMMMMMM</p>
-      <p>Fabricante: Fulano cicrano</p>
-      <p>Estoque: 42874</p>
+      <p>Grupo: {product.Grupo}</p>
+      <p>Fornecedor: {product["Fornecedor"]}</p>
+      <p>Fabricante: {product["Fabricante"]}</p>
+      <p>Estoque: {product["Unidades em Estoque"]}</p>
     </section>
 
   </main>

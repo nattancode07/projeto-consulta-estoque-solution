@@ -47,19 +47,20 @@
   background-color: #6499d051;
   display: flex;
   justify-content: space-between;
-  height: 120px;
+  height: 150px;
 }
 
 .nome-produto {
   padding-left: 10px ;
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 700;
-  margin:8px 0px;
+  margin-top: 8px;
+  margin-bottom: 4px;
 }
 
 .descricao-do-produto {
   padding-left: 10px ;
-  font-size: 0.9em;
+  font-size: 0.85em;
   margin-top: 0px;
 }
 

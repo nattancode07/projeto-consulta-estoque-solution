@@ -10,13 +10,29 @@ const config = {
     password: 'qaz@123',
     server: 'TSCRU_CALIFOR\\SQLEXPRESS',
     database: 'BaseConstrucao91200',
-    port: 5433, // Porta que você descobriu que o SQL Server está usando
+    port: 5433, 
     options: {
-        encrypt: true, // Usado se o servidor SQL suportar SSL
-        trustServerCertificate: true, // Usado para desenvolvimento local
+        encrypt: true, 
+        trustServerCertificate: true, 
     },
 };
 
+/*const poolPromise = new sql.ConnectionPool(config)
+    .connect()
+    .then(pool => {
+        console.log('Conectado ao SQL Server');
+        return pool;
+    })
+    .catch(err => {
+        console.error('Falha na conexão com o SQL Server', err);
+        throw err;
+    });
+
+module.exports = {
+    sql, 
+    poolPromise
+};
+*/
 const app = express();
 const server = http.createServer(app);
 
@@ -37,9 +53,7 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
     console.log('Um usuário se conectou');
 
-    // Exemplo de consulta a uma tabela no SQL Server quando um novo cliente se conecta
     sql.connect(config).then(pool => {
-        // Substitua 'nome_da_tabela' pelo nome real da tabela que você quer consultar
         return pool.request()
             .query("select * from Cadastro_de_mercadorias");
     }).then(result => {
@@ -54,6 +68,18 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(3001, () => {
-    console.log('Servidor rodando na porta 3001');
+server.listen(3023, () => {
+    console.log('Servidor rodando na porta 3023');
 });
+
+const poolPromise = new sql.ConnectionPool(config)
+    .connect()
+    .then(pool => {
+        console.log('Conectado ao SQL Server');
+        return pool;
+    })
+    .catch(err => console.log('Falha ao conectar ao SQL Server', err));
+
+module.exports = {
+    sql, poolPromise
+};
